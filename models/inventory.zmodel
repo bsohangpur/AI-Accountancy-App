@@ -1,0 +1,16 @@
+
+ import "./user.zmodel"  
+
+model Inventory {
+
+    id                String        @id @default(uuid())  
+    itemName    String?          
+    quantity    Float?            
+    price          Float?            
+    userId        String?          
+    user            User?            @relation(fields: [userId], references: [id], name:"user")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

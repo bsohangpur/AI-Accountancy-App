@@ -1,0 +1,54 @@
+import "./account.zmodel";
+import "./session.zmodel";
+import "./role.zmodel";
+
+import './chat.zmodel'
+
+import './document.zmodel'
+
+import './inventory.zmodel'
+
+import './invoice.zmodel'
+
+import './expense.zmodel'
+
+import './bankReconciliation.zmodel'
+
+import './financialInsight.zmodel'
+
+enum UserStatus {
+    INVITED
+    VERIFIED
+}
+
+model User {
+    id                String             @id @default(uuid())
+    name              String?
+    email             String?            @unique
+    pictureUrl        String?            @default('https://i.imgur.com/ZdJSK3Y.jpeg')
+    tokenInvitation   String?
+    
+    stripeCustomerId  String?
+    
+    status            UserStatus         @default(VERIFIED)
+    password          String?            @password @omit
+    dateCreated       DateTime           @default(now())
+    dateUpdated       DateTime           @updatedAt @default(now())
+    accounts          Account[]
+    sessions          Session[]
+    roles             Role[]
+
+chats          Chat[]        @relation("user")  
+        documents  Document[]  @relation("user")  
+        inventorys  Inventory[]  @relation("user")  
+        invoices    Invoice[]  @relation("user")  
+        expenses    Expense[]  @relation("user")  
+        bankReconciliations  BankReconciliation[]  @relation("user")  
+        financialInsights  FinancialInsight[]  @relation("user")  
+
+@@auth()
+    @@allow("all", auth().id == this.id)
+    @@allow('all', auth().roles?[name == 'admin'])
+    @@allow("create", true)
+    @@allow("read", true)
+}
