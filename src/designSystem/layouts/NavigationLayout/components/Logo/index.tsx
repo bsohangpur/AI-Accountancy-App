@@ -35,7 +35,7 @@ export const Logo: React.FC<Props> = ({
       />
       {isLabel && (
         <Typography.Title level={4} style={{ margin: '0px' }}>
-          AI Powered Real Time Chat Accountancy Management System
+          AI Accountancy App
         </Typography.Title>
       )}
     </Flex>

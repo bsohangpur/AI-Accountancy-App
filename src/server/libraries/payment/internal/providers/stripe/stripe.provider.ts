@@ -29,20 +29,6 @@ export class StripeProvider implements Provider {
     console.log('Initialization...')
 
     try {
-      const secretKey = process.env.SERVER_PAYMENT_STRIPE_SECRET_KEY
-
-      this.webhookSecret = process.env.SERVER_PAYMENT_STRIPE_WEBHOOK_SECRET
-
-      if (!secretKey) {
-        throw new Error(
-          'Set SERVER_PAYMENT_STRIPE_SECRET_KEY in your .env to activate',
-        )
-      }
-
-      this.client = new StripeSDK(secretKey, {
-        apiVersion: '2024-04-10',
-      })
-
       console.log(`Stripe active`)
     } catch (error) {
       console.warn(`Stripe failed to start`)

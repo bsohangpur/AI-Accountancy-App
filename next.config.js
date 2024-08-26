@@ -6,16 +6,16 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: false,
-  
+
   experimental: {
     serverComponentsExternalPackages: ['pdf-parse'],
   },
   webpack(config) {
     config.experiments = { ...config.experiments, topLevelAwait: true }
-    config.externals = [...config.externals, 'hnswlib-node'] // required for RAG module
+    config.externals = [...config.externals] // required for RAG module
     return config
   },
-  
+
 }
 
 export default config

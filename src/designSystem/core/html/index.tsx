@@ -1,4 +1,5 @@
 import { theme } from 'antd'
+import Head from 'next/head'
 import { ReactNode } from 'react'
 
 const { useToken } = theme
@@ -15,9 +16,9 @@ export const MrbHtml: React.FC<Props> = ({ children }: Props) => {
       lang="en"
       style={{ background: token.colorBgBase, color: token.colorTextBase }}
     >
-      <head>
-        <title>AI Powered Real Time Chat Accountancy Management System</title>
-      </head>
+      <Head>
+        <title>AI Accountancy App</title>
+      </Head>
       <body>{children}</body>
     </html>
   )

@@ -1,34 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import {
-  Typography,
-  Button,
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  Table,
-  Space,
-  Modal,
-  Spin,
-} from 'antd'
-import {
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  DollarCircleOutlined,
-  BellOutlined,
-} from '@ant-design/icons'
-const { Title, Text } = Typography
-const { Option } = Select
 import { useUserContext } from '@/core/context'
-import { useRouter, useParams } from 'next/navigation'
-import { useUploadPublic } from '@/core/hooks/upload'
-import { useSnackbar } from 'notistack'
-import dayjs from 'dayjs'
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem/layouts/Page.layout'
+import {
+  DeleteOutlined,
+  DollarCircleOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from '@ant-design/icons'
+import {
+  Button,
+  DatePicker,
+  Form,
+  InputNumber,
+  Modal,
+  Select,
+  Space,
+  Spin,
+  Table,
+  Typography,
+} from 'antd'
+import dayjs from 'dayjs'
+import { useParams, useRouter } from 'next/navigation'
+import { useSnackbar } from 'notistack'
+import { useState } from 'react'
+const { Title, Text } = Typography
+const { Option } = Select
 
 export default function InvoicesPage() {
   const router = useRouter()
@@ -78,6 +76,7 @@ export default function InvoicesPage() {
 
   const handleAI = async () => {
     try {
+      //@ts-ignore
       const response = await generateText.mutateAsync({
         prompt: 'Predict payment delays for my invoices',
       })
